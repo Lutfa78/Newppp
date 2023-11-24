@@ -1,0 +1,28 @@
+name: Windows VPS Workflow
+
+# Define when the workflow should run
+on:
+  push:
+    branches:
+      - main
+
+# Define the jobs that should run as part of the workflow
+jobs:
+  build:
+    # Specify the operating system for this job
+    runs-on: windows-latest
+
+    # Define the steps that should be executed in this job
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1
+
+      - name: Build and Test
+        run: |
+          dotnet build
+          dotnet test
